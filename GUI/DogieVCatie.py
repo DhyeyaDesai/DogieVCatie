@@ -45,13 +45,11 @@ def predict(event):
 		op = net(img)
 
 		if torch.argmax(op).item() == 0:
-
-			prediction = "It's a cat.\nAm I right?"
+			prediction = "I'm " + str((op.max().item())*100) + " % sure It's a cat.\nAm I right?"
 			prediction_vector = torch.tensor([1., 0.])
 
 		else:
-
-			prediction = "It's a dog"
+			prediction = "I'm " + str((op.max().item())*100) + " % sure It's a dog.\nAm I right?"
 			prediction_vector = torch.tensor([0., 1.])
 
 		feedback = messagebox.askquestion("This is my Prediction", prediction)
